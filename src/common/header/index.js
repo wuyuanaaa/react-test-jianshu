@@ -1,29 +1,66 @@
 import React, { Component } from 'react';
-import { CSSTransition } from 'react-transition-group'
+import { connect } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
+import { actionCreators } from './store'
 import {
   HeaderWrapper,
   Logo,
   Nav,
   NavItem,
+  SearchWrapper,
   NavSearch,
+  SearchInfo,
+  SearchInfoTitle,
+  SearchInfoSwitch,
+  SearchInfoList,
+  SearchInfoItem,
   Addition,
-  Button,
-  SearchWrapper
+  Button
 } from './style'
 
 class Header extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      focused: false
-    }
+  getListArea() {
+    const { focused, mouseIn, list, page, totalPage, handleMouseEnter, handleMouseLeave, handleChangePage } = this.props;
+    const newList = list.toJS();
+    const pageList = newList.slice(page * 10, (page + 1) * 10);
 
-    this.handleInputFocus = this.handleInputFocus.bind(this);
-    this.handleInputBlur = this.handleInputBlur.bind(this);
+    if(focused || mouseIn) {
+      return (
+        <SearchInfo
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <SearchInfoTitle>
+            热门搜索
+            <SearchInfoSwitch
+              onClick={() => handleChangePage(page, totalPage, this.spinIcon)}
+            >
+              <i ref={(icon) => {this.spinIcon = icon}} className="iconfont spin">&#xe851;</i>
+              换一批
+            </SearchInfoSwitch>
+          </SearchInfoTitle>
+          <SearchInfoList>
+            {
+              pageList.map(val => {
+                return (
+                  <SearchInfoItem
+                    key={val}
+                  >{val}</SearchInfoItem>
+                )
+              })
+            }
+          </SearchInfoList>
+        </SearchInfo>
+      )
+    }else {
+      return null;
+    }
   }
 
   render() {
+    const { focused, handleInputFocus, handleInputBlur } = this.props;
+
     return (
       <HeaderWrapper>
         <Logo href="/"/>
@@ -36,20 +73,20 @@ class Header extends Component {
           </NavItem>
           <SearchWrapper>
             <CSSTransition
-              in={this.state.focused}
+              in={focused}
               timeout={200}
               classNames="slide"
             >
               <NavSearch
-                className={this.state.focused ? 'focused' : ''}
-                onFocus={this.handleInputFocus}
-                onBlur={this.handleInputBlur}
+                className={focused ? 'focused' : ''}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
               ></NavSearch>
             </CSSTransition>
-            
             <i 
-              className={this.state.focused ? 'iconfont focused' : 'iconfont'}
+              className={focused ? 'iconfont focused zoom' : 'iconfont zoom'}
             >&#xe661;</i>
+            {this.getListArea()}
           </SearchWrapper>
         </Nav>
         <Addition>
@@ -59,19 +96,58 @@ class Header extends Component {
       </HeaderWrapper>
     )
   }
-
-  handleInputFocus() {
-    this.setState({
-      focused: true
-    })
-  }
-
-  handleInputBlur() {
-    this.setState({
-      focused: false
-    })
-  }
-
 }
 
-export default Header;
+
+
+const mapStateToProps = (state) => {
+  return {
+    // focused: state.get('header').get('focused')
+    focused: state.getIn(['header', 'focused']),
+    mouseIn: state.getIn(['header', 'mouseIn']),
+    list: state.getIn(['header', 'list']),
+    page: state.getIn(['header', 'page']),
+    totalPage: state.getIn(['header', 'totalPage'])
+  }
+}
+
+const mapDispathToProps = (dispatch) => {
+  return {
+    handleInputFocus() {
+      dispatch(actionCreators.getList());
+      dispatch(actionCreators.searchFocus());
+    },
+
+    handleInputBlur() {
+      dispatch(actionCreators.searchBlur());
+    },
+
+    handleMouseEnter() {
+      dispatch(actionCreators.infoEnter());
+    },
+
+    handleMouseLeave() {
+      dispatch(actionCreators.infoLeave());
+    },
+
+    handleChangePage(page, totalPage, spin) {
+      let originAngle = spin.style.transform.replace(/[^0-9]/g, '')
+
+      if (originAngle) {
+        originAngle = originAngle * 1;
+      } else {
+        originAngle = 0;
+      }
+
+      spin.style.transform = `rotate(${originAngle + 360}deg)`;
+      console.log(originAngle);
+      
+      page++;
+      page === totalPage && (page = 0);
+      dispatch(actionCreators.changePage(page))
+    }
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispathToProps)(Header);
