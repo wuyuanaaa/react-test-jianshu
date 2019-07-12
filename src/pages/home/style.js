@@ -20,7 +20,8 @@ export const HomeLeft = styled.div`
 
 export const HomeRight = styled.div`
   float: right;
-  width: 240px;
+  padding-top: 28px;
+  width: 280px;
 `;
 
 
@@ -71,6 +72,9 @@ export const ListItem = styled.div`
     border-radius: 4px;
     border: 1px solid #f0f0f0;
     background: #ccc;
+    &.list-img-hide {
+      display: none;
+    }
   }
 `;
 
@@ -113,3 +117,84 @@ export const ListInfo = styled.div`
     padding-right: 165px;
   }
 `;
+
+// recommend
+
+export const RecommendWrapper = styled.div`
+  margin-bottom: 30px;
+`
+
+export const RecommendItem = styled.div`
+  width: 280px;
+  height: 50px;
+  margin-bottom: 6px;
+  .recommend-img {
+    display: block;
+    width: 100%;
+  }
+`
+
+
+// writer
+
+export const WriterWrapper = styled.div`
+  margin-top: 15px;
+`
+
+export const WriterTitle = styled.div`
+  font-size: 14px;
+  color: #969696;
+  .switch {
+    float: right;
+    cursor: pointer;
+  }
+`
+
+export const WriterItem = styled.div`
+  overflow: hidden;
+  margin-top: 15px;
+  .img {
+    float: left;
+    margin-right: 10px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #ccc;
+  }
+  .follow {
+    float: right;
+    margin-top: 5px;
+    font-size: 13px;
+    color: #42c02e;
+    cursor: pointer;
+  }
+  .nickName,
+  .des {
+    display: block;
+  }
+  .nickName {
+    color: #333;
+    line-height: 20px;
+    padding-top: 5px;
+    margin-right: 60px;
+    font-size: 14px;
+  }
+  .des {
+    margin-top: 2px;
+    font-size: 12px;
+    color: #969696;
+  }
+`
+
+export const AllWriter = styled.button`
+  display: block;
+  margin-top: 20px;
+  padding: 7px 7px 7px 12px;
+  width: 100%;
+  font-size: 13px;
+  color: #787878;
+  background-color: #f7f7f7;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  cursor: pointer;
+`

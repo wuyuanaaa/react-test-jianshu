@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { actionCreators } from './store'
 import Topic from './components/Topic';
 import List from './components/List';
 import Recommend from './components/Recommend';
@@ -10,10 +12,12 @@ import {
 } from './style'
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {  }
+  
+  
+  componentDidMount() {
+    this.props.getHomeList();
   }
+
   render() { 
     return ( 
       <HomeWrapper>
@@ -34,5 +38,20 @@ class Home extends Component {
     );
   }
 }
+
+
+const mapState = (state) => {
+  return {
+
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    getHomeList() {
+      dispatch(actionCreators.getHomeList());
+    }
+  }
+}
  
-export default Home;
+export default connect(mapState, mapDispatch)(Home);

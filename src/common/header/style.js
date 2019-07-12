@@ -19,9 +19,9 @@ export const Logo = styled.a`
 `
 
 export const Nav = styled.div`
-  width: 960px;
+  max-width: 960px;
   height: 100%;
-  padding-right: 70px;
+  padding-right: 208px;
   box-sizing: border-box;
   margin: 0 auto;
 `
@@ -86,6 +86,7 @@ export const SearchInfo = styled.div`
   width: 240px;
   padding: 0 20px;
   box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+  background-color: #fff;
 `
 
 export const SearchInfoTitle = styled.div`

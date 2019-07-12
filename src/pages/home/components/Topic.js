@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actionCreators } from '../store'
+// import { actionCreators } from '../store'
 import {
   TopicWrapper,
   TopicItem,
@@ -8,20 +8,16 @@ import {
 
 class Topic extends Component {
   
-  componentDidMount() {
-    this.props.getTopicList();
-  }
-
 
   render() {
     const { list } = this.props;
     return (
       <TopicWrapper>
         {
-          list.map((val, index) => {
+          list.map((val) => {
             return (
               <TopicItem
-                key={index}
+                key={val.get('title')}
               >
                 <span className="item-icon"></span>
                 {val.get('title')}
@@ -42,13 +38,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispathToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getTopicList() {
-      dispatch(actionCreators.getList());
-    }
+    
   }
 }
 
  
-export default connect(mapStateToProps, mapDispathToProps)(Topic);
+export default connect(mapStateToProps, mapDispatchToProps)(Topic);
