@@ -42,11 +42,5 @@ const mapState = (state) => {
   }
 }
 
-
-const mapDispatch = (dispatch) => {
-  return {
-
-  }
-}
  
-export default connect(mapState, mapDispatch)(Recommend);
+export default connect(mapState, null)(Recommend);

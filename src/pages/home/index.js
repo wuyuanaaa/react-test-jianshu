@@ -40,12 +40,6 @@ class Home extends Component {
 }
 
 
-const mapState = (state) => {
-  return {
-
-  }
-}
-
 const mapDispatch = (dispatch) => {
   return {
     getHomeList() {
@@ -54,4 +48,4 @@ const mapDispatch = (dispatch) => {
   }
 }
  
-export default connect(mapState, mapDispatch)(Home);
+export default connect(null, mapDispatch)(Home);
