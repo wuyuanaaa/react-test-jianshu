@@ -18,3 +18,8 @@ export const getHomeList = () => {
       .catch(e => console.log(e))
   }
 }
+
+export const toggleBackTopShow = (data) => ({
+  type: constants.TOGGLE_BACKTOP_SHOW,
+  data: fromJS(data)
+})

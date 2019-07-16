@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import { 
   ListItem,
   ListInfo
 } from '../style'
 
-class List extends Component {
+class List extends PureComponent {
   
 
   render() { 
@@ -18,36 +19,40 @@ class List extends Component {
         {
           newList.map(val => {
             return (
-              <ListItem
+              <Link
                 key={val.id}
+                to='/detail'
               >
-                <span
-                  className={val.img && val.img.length ? 'list-img' : 'list-img list-img-hide'}
-                ></span>
-                <ListInfo
-                  className={val.img && val.img.length ? 'have-img' : ''}
-                >
-                  <h3 className="title">{val.title}</h3>
-                  <p className="abstract">{val.abstract}</p>
-                  <div className="meta">
-                    <span className="meta-info score">
-                      <i className="iconfont">&#xe63c;</i>
-                      {val.score}
-                    </span>
-                    <span className="meta-info nickname">
-                      {val.nickname}
-                    </span>
-                    <span className="meta-info">
-                      <i className="iconfont">&#xe601;</i>
-                      {val.comment}
-                    </span>
-                    <span className="meta-info">
-                      <i className="iconfont">&#xe602;</i>
-                      {val.like}
-                    </span>
-                  </div>
-                </ListInfo>
-              </ListItem>
+                <ListItem>
+                  <span
+                    className={val.img && val.img.length ? 'list-img' : 'list-img list-img-hide'}
+                  ></span>
+                  <ListInfo
+                    className={val.img && val.img.length ? 'have-img' : ''}
+                  >
+                    <h3 className="title">{val.title}</h3>
+                    <p className="abstract">{val.abstract}</p>
+                    <div className="meta">
+                      <span className="meta-info score">
+                        <i className="iconfont">&#xe63c;</i>
+                        {val.score}
+                      </span>
+                      <span className="meta-info nickname">
+                        {val.nickname}
+                      </span>
+                      <span className="meta-info">
+                        <i className="iconfont">&#xe601;</i>
+                        {val.comment}
+                      </span>
+                      <span className="meta-info">
+                        <i className="iconfont">&#xe602;</i>
+                        {val.like}
+                      </span>
+                    </div>
+                  </ListInfo>
+                </ListItem>
+              </Link>
+              
             )
           })
         }
