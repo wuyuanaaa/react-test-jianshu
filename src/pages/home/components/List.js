@@ -21,7 +21,7 @@ class List extends PureComponent {
             return (
               <Link
                 key={val.id}
-                to='/detail'
+                to={'/detail/' + val.id}
               >
                 <ListItem>
                   <span
