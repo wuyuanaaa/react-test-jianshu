@@ -80,6 +80,7 @@ export const NavSearch = styled.input.attrs({
 `
 
 export const SearchInfo = styled.div`
+  z-index: 2;
   position: absolute;
   left: 0;
   top: 56px;

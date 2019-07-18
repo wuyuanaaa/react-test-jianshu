@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { actionCreators } from './store'
 import {
@@ -7,12 +7,8 @@ import {
   Content
 } from './style'
 
-class Detail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {  }
-  }
-
+class Detail extends PureComponent {
+  
   render() { 
     
     const { title, content, match } = this.props;
