@@ -11,9 +11,9 @@ class Login extends PureComponent {
   
   render() {
     const { isLogin, handleLogin } = this.props;
-    return isLogin ? (
+    return isLogin ? 
       <Redirect to='/' />
-    ) : (
+      : 
       <LoginWrapper>
         <LoginInner>
           <input 
@@ -35,7 +35,6 @@ class Login extends PureComponent {
           </button>
         </LoginInner>
       </LoginWrapper>
-    )
   }
 
 
